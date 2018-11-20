@@ -1,5 +1,6 @@
 const slide = document.querySelectorAll('.slide');
 const navLinks = document.querySelectorAll('.nav a');
+const nav = document.querySelector('.nav');
 const navListItems = document.querySelectorAll('.nav li');
 const body = document.querySelector('body');
 
@@ -51,69 +52,42 @@ const scrollToSection = (sectionFrom, sectionTo) => {
 	if (from < to) {
 		tlDown
 			.set(body, { className: '+=is-animating' })
-			.to(sectionFrom, 1.2, {
-				x: '-=100%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.to(sectionTo, 1.2, {
-				x: '0%',
-				ease: Power4.easeInOut,
-			}, '0')
-			.to(bcgFrom, 1.2, {
-				x: '30%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.from(bcg, 1.2, {
-				x: '-30%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.from(heading, 0.7, {
-				autoAlpha: 0,
-				x: 40,
+			.set(sectionTo, { scale: 0.9 })
+			.add('out')
+			.to(nav, 0.3, { y: '10px', autoAlpha: 0, ease: Power4.easeInOut }, 'out')
+			.to(sectionFrom, 0.3, {
+				scale: 0.9,
+				transformOrigin: 'center center',
 				ease: Power4.easeInOut
-			}, '-=1')
-			.from(subheading, 0.7, {
-				autoAlpha: 0,
-				x: 40,
-				ease: Power4.easeInOut
-			}, '-=0.6')
+			}, 'out')
+			.add('across')
+			.to(sectionFrom, 1.2, { ease: Power4.easeInOut, x: '-=100%', clearProps: 'all' },  'out-=.1')
+			.to(sectionTo, 1.2, { x: '0%', ease: Power4.easeInOut },  'out-=.1')
+			.add('in')
+			.to(sectionTo, 0.3, { scale: 1,  ease: Power4.easeInOut }, 'in-=0.4')
+			.from(heading, 0.3, { autoAlpha: 0, y: '-15px',  ease: Power4.easeInOut }, 'in')
+			.from(subheading, 0.3, { autoAlpha: 0, y: '-15px',  ease: Power4.easeInOut }, 'in+=0.1')
+			.from(nav, 0.3, { autoAlpha: 1, y: '0',  ease: Power4.easeInOut }, 'in+=0.2')
 			.set(body, { className: '-=is-animating' });
-	} else {
+		} else {
 		tlUp
 			.set(body, { className: '+=is-animating' })
-			.set(sectionTo, { x: '-100%' })
-			.to(sectionFrom, 1.2, {
-				x: '100%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.to(sectionTo, 1.2, {
-				x: '0%',
-				ease: Power4.easeInOut,
-			}, '0')
-			.to(bcgFrom, 1.2, {
-				x: '-30%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.from(bcg, 1.2, {
-				x: '30%',
-				ease: Power4.easeInOut,
-				clearProps: 'all'
-			}, '0')
-			.from(heading, 0.7, {
-				autoAlpha: 0,
-				x: 40,
+			.set(sectionTo, { x: '-100%', scale: 0.9 })
+			.add('out')
+			.to(nav, 0.3, { y: '10px', autoAlpha: 0, ease: Power4.easeInOut }, 'out')
+			.to(sectionFrom, 0.3, {
+				scale: 0.9,
+				transformOrigin: 'center center',
 				ease: Power4.easeInOut
-			}, '-=1')
-			.from(subheading, 0.7, {
-				autoAlpha: 0,
-				x: 40,
-				ease: Power4.easeInOut
-			}, '-=0.6')
+			}, 'out')
+			.add('across')
+			.to(sectionFrom, 1.2, { ease: Power4.easeInOut, x: '100%', clearProps: 'all' },  'out-=.1')
+			.to(sectionTo, 1.2, { x: '0%', ease: Power4.easeInOut },  'out-=.1')
+			.add('in')
+			.to(sectionTo, 0.3, { scale: 1,  ease: Power4.easeInOut }, 'in-=0.4')
+			.from(heading, 0.3, { autoAlpha: 0, y: '-15px',  ease: Power4.easeInOut }, 'in')
+			.from(subheading, 0.3, { autoAlpha: 0, y: '-15px',  ease: Power4.easeInOut }, 'in+=0.1')
+			.from(nav, 0.3, { autoAlpha: 1, y: '0',  ease: Power4.easeInOut }, 'in+=0.2')
 			.set(body, { className: '-=is-animating' });
 	}
 };
@@ -123,7 +97,7 @@ const handleLinkClick = (e) => {
 	const sectionToId = e.target.hash;
 	const sectionTo = document.querySelector(sectionToId);
 	const isAnimating = body.classList.contains('is-animating');
-	
+
 	if (!isAnimating) {
 		scrollToSection(getActiveSlide(), sectionTo);
 	};
