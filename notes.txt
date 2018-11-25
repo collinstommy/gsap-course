@@ -1,0 +1,8 @@
+immediateRender: false => prevents set happening until the timeline is reached
+timeline.seek
+{ attr: { x: 100 }} => set the x of a svg path
+svg mask => acts as view pane, masks any part of target path that is not within its bounds
+bezier => curve movement
+yoyo: true
+repeat: 10
+onComplete

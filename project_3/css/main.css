@@ -58,10 +58,15 @@ textarea {
 
 body {
   font: 16px/1.5 'Open Sans', Helvetica, Helvetica Neue, Arial, sans-serif;
-  background-color: #69d1e2;
+  background-color: #ffffff;
   color: #294C67;
   overflow: hidden;
   height: 100%;
+  transition: all 1s linear;
+}
+
+body.is-active {
+  background-color: #69d1e2;
 }
 
 h1, h2, h3, h4 {
@@ -90,9 +95,15 @@ h1 {
 h1,
 #BulbIdea,
 #Coin,
-#Petr {
+#Petr,
+#stage {
     visibility: hidden;
     opacity: 0;
+}
+
+#PaperText text{
+    font-weight: 700;
+    font-size: 18px;
 }
 
 
